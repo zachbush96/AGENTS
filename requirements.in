@@ -3,6 +3,7 @@ duckduckgo-search
 groq
 nest_asyncio
 openai
+ollama
 pandas
 phidata
 streamlit
