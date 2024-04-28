@@ -110,6 +110,7 @@ numpy==1.26.4
     #   yfinance
 openai==1.23.6
     # via -r cookbook/llms/groq/investment_researcher/requirements.in
+ollama
 orjson==3.10.1
     # via duckduckgo-search
 packaging==24.0
