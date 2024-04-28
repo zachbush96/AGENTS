@@ -13,9 +13,20 @@ st.set_page_config(
     page_icon=":orange_heart:",
 )
 st.title("Investment Researcher")
-st.markdown("##### :orange_heart: Built using [phidata](https://github.com/phidatahq/phidata)")
-#Built by Zach
-st.markdown("##### :orange_heart: Built by Zach")
+#st.markdown("##### :orange_heart: Built using [phidata](https://github.com/phidatahq/phidata)")
+st.markdown("##### :Built by Zach")
+#Include a markdown section to explain how to use the app
+st.markdown("## How to use the app")
+st.markdown("1. Enter a ticker symbol in the text box on the left side of the screen.")
+st.markdown("2. Select Generate Report to get a report on the company.")
+st.markdown("3. Select Generate Options Strategy to get an options strategy based on the report.")
+st.markdown("4. Select Generate Strategy Instructions to get instructions for the options strategy.")
+st.markdown("5. Select New Run to start over.")
+#NOTES: GROQ may stop responding, and the app may be ununsable for up to 24hrs. Each button click should be in order of the steps above. (<-- rephrase that better lol)
+st.markdown("## :warning: Important Notes :warning:")
+st.markdown("1. GROQ may stop responding, and the app may be unusable for up to 24hrs.")
+st.markdown("2. Each button click should be in order of the steps above.")
+st.markdown("3. If the app is unresponsive, please try again later.")
 
 
 def restart_assistant():
@@ -24,7 +35,7 @@ def restart_assistant():
     st.session_state["options_investor_assistant"] = None
     st.session_state["options_strategy"] = None
     st.session_state["strategy_instructions"] = None
-    
+
 
     st.rerun()
 
@@ -193,8 +204,6 @@ def main() -> None:
                 final_report += delta  # type: ignore
                 final_report_container.markdown(final_report)
             st.session_state["final_report"] = final_report
-    
-    
     # Add a new button to generate the options strategy
     # Should read in the report_input and generate an options strategy
     if st.sidebar.button("Generate Options Strategy"):
@@ -210,15 +219,11 @@ def main() -> None:
             options_strategy = ""
             for delta in options_investor_assistant.run(strategy_input):
                 options_strategy += delta  # Assuming the assistant outputs markdown or plain text
-                
             st.session_state["options_strategy"] = options_strategy
-
         # Display the generated options strategy
         with st.container():
             st.markdown("## Options Strategy")
             st.markdown(options_strategy)
-    
-
     #Add a new button to getnerate Strategy Instructions
     if st.sidebar.button("Generate Strategy Instructions"):
         strategy_instructions = st.session_state.get("strategy_instructions")
@@ -239,13 +244,6 @@ def main() -> None:
             st.markdown("## Strategy Instructions")
             st.markdown(strategy_instructions)
     st.sidebar.markdown("---")
-
     if st.sidebar.button("New Run"):
         restart_assistant()
-    
-    
-    
-    
-
-
 main()
